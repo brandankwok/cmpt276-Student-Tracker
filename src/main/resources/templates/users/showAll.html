@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"></head>
+<body>
+    <main class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <h1 class="text-center mt-5 mb-4">Student Tracker</h1>
+
+                <form action="/users/new" method="get">
+                    <button>Add Student</button>
+                </form>
+                
+                <table class="table table-striped">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Height (cm)</th>
+                        <th scope="col">Weight (lbs)</th>
+                        <th scope="col">Hair Color</th>
+                        <th scope="col">Gpa</th>
+                        <th scope="col">Favorite food</th>
+                    </tr>
+                    <tr th:each="user: ${users}">
+                        <td th:text="${user.name}"></td>
+                        <td th:text="${user.height}"></td>
+                        <td th:text="${user.weight}"></td>
+                        <td th:text="${user.hair_color}"></td>
+                        <td th:text="${user.gpa}"></td>
+                        <!-- <td th:text="${user.favorite_food}"></td> -->
+                    </tr>
+                </table>
+                <!-- <ul>
+                    <li th:style="'font-size:'+${user.height}+'pt'" th:each="user: ${users}">
+                        <span th:text="${user.name}"></span> <br>
+                        <span th:text="${user.favourite_food}"></span>
+                        <div th:switch="${user.name}">
+                            <span th:case="'Brandan'">Brandan is a cool guy!</span>
+                            <span th:case="*">regular user</span>
+                        </div>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+    </main>
+</body>
+</html>
