@@ -25,7 +25,7 @@ public class UsersController {
     @Autowired
     private UserRepository userRepo;
     
-    @GetMapping("/users/view")
+    @GetMapping("/users")
     public String getAllUsers(Model model){
 
         List<User> users = userRepo.findAll();
@@ -34,13 +34,13 @@ public class UsersController {
         return "users/showAll";
     }
 
-    @PostMapping("/users/add")
+    @PostMapping("/users")
     public String addUser(@RequestParam Map<String, String> newUser,HttpServletResponse response) {
         if (newUser.get("name") == "" || newUser.get("weight") == "" 
             || newUser.get("height") == "" || newUser.get("hair_color") == ""
-            || newUser.get("gpa") == "" || newUser.get("favorite_food") == "") 
+            || newUser.get("gpa") == "" || newUser.get("age") == "") 
             {
-                return "users/failed";
+                return "redirect:/users";
             }
         
         String newName = newUser.get("name");
@@ -48,21 +48,20 @@ public class UsersController {
         int newHeight = Integer.parseInt(newUser.get("height"));
         String newHair_color = newUser.get("hair_color");
         float newGpa = Float.parseFloat(newUser.get("gpa"));
-        String NewFavorite_food = newUser.get("favorite_food");
+        int NewAge = Integer.parseInt(newUser.get("age"));
 
-        if (newWeight <= 0 || newHeight <= 0 || newGpa <= 0) {
-            return "users/failed";
+        if (newWeight <= 0 || newHeight <= 0 || newGpa < 0.00 || newGpa > 4.33) {
+            return "redirect:/users";
         }
         
-        userRepo.save(new User(newName,newWeight,newHeight,newHair_color,newGpa,NewFavorite_food));
+        userRepo.save(new User(newName,newWeight,newHeight,newHair_color,newGpa,NewAge));
         response.setStatus(201);
         System.out.println("ADD User");
-        return "users/addedUser";
+        return "redirect:/users";
     }
     
     @GetMapping("/users/new")
     public String addPage() {
         return "users/add";
-    }
-    
+    }    
 }

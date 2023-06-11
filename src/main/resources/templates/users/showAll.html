@@ -18,20 +18,27 @@
                 
                 <table class="table table-striped">
                     <tr>
+                        <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Height (cm)</th>
                         <th scope="col">Weight (lbs)</th>
                         <th scope="col">Hair Color</th>
                         <th scope="col">Gpa</th>
-                        <th scope="col">Favorite food</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Actions</th>
                     </tr>
                     <tr th:each="user: ${users}">
+                        <td th:text="${user.uid}"></td>
                         <td th:text="${user.name}"></td>
                         <td th:text="${user.height}"></td>
                         <td th:text="${user.weight}"></td>
                         <td th:text="${user.hair_color}"></td>
                         <td th:text="${user.gpa}"></td>
-                        <!-- <td th:text="${user.favorite_food}"></td> -->
+                        <td th:text="${user.age}"></td>
+                        <td>
+                            <button>Edit</button>
+                            <button>Delete</button>
+                        </td>
                     </tr>
                 </table>
                 <!-- <ul>

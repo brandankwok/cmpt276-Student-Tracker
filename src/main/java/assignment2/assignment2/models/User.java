@@ -13,18 +13,18 @@ public class User {
     private int height;
     private String hair_color;
     private float gpa;
-    private String favorite_food;
+    private int age;
 
     public User() {
     }
 
-    public User(String name, int weight, int height, String hair_color, float gpa, String favorite_food) {
+    public User(String name, int weight, int height, String hair_color, float gpa, int age) {
         this.name = name;
         this.weight = weight;
         this.height = height;
         this.hair_color = hair_color;
         this.gpa = gpa;
-        this.favorite_food = favorite_food;
+        this.age = age;
     }
 
     public String getName() {
@@ -67,12 +67,12 @@ public class User {
         this.gpa = gpa;
     }
 
-    public String getfavorite_food() {
-        return favorite_food;
+    public int getAge() {
+        return age;
     }
 
-    public void setfavorite_food(String favorite_food) {
-        this.favorite_food = favorite_food;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public int getUid() {
