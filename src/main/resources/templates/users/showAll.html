@@ -13,12 +13,12 @@
                 <h1 class="text-center mt-5 mb-4">Student Tracker</h1>
 
                 <form action="/users/new" method="get">
-                    <button>Add Student</button>
+                    <button class="btn btn-primary">Add Student</button>
                 </form>
                 
                 <table class="table table-striped">
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Height (cm)</th>
                         <th scope="col">Weight (lbs)</th>
@@ -36,8 +36,11 @@
                         <td th:text="${user.gpa}"></td>
                         <td th:text="${user.age}"></td>
                         <td>
-                            <button>Edit</button>
-                            <button>Delete</button>
+                            <!-- <form action="/users/edit" method="get">
+                                <button class="btn btn-info">Edit</button>
+                            </form> -->
+                            <a th:href="@{'/users/edit/' + ${user.uid}}" class="btn btn-primary">Edit</a>
+                            <a th:href="@{/users/delete/{uid}(uid=${user.uid})}" class="btn btn-danger ml-2">Delete</a>
                         </td>
                     </tr>
                 </table>
