@@ -29,7 +29,13 @@ public class UsersController {
         List<User> users = studentRepo.findAll();
         
         model.addAttribute("users", users);
-        return "users/showAll";
+        return "users/students";
+    }
+
+    // go to rectangles page
+    @GetMapping("/users/rectangles")
+    public String rectanglesPage() {
+        return "users/rectangles";
     }
 
     // go to add student page
