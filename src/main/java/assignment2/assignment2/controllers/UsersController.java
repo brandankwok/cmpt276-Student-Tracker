@@ -80,10 +80,10 @@ public class UsersController {
     }
     
     // edit student attributes
-    @GetMapping("/students/edit/{uid}")
+    @GetMapping("/students/{uid}")
 	public String editStudentForm(@PathVariable Integer uid, Model model) {
 		model.addAttribute("user", studentRepo.findById(uid).get());
-		return "/students/edit";
+		return "students/edit";
 	}
 
     // save updated student information

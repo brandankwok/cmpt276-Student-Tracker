@@ -45,7 +45,7 @@
                             <td th:text="${user.gpa}" class="text-center"></td>
                             <td th:text="${user.age}" class="text-center"></td>
                             <td>
-                                <a th:href="@{/students/edit/{uid}(uid=${user.uid})}" class="btn btn-primary justify-content-center">Edit</a>
+                                <a th:href="@{/students/{uid}(uid=${user.uid})}" class="btn btn-primary justify-content-center">Edit</a>
                                 <a th:href="@{/students/delete/{uid}(uid=${user.uid})}" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
