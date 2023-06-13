@@ -22,37 +22,37 @@ public class UsersController {
     @Autowired
     private UserRepository studentRepo;
     
-    // display all users
-    @GetMapping("/users")
-    public String getAllUsers(Model model){
+    // display all students
+    @GetMapping("/students")
+    public String getAllStudents(Model model){
 
-        List<User> users = studentRepo.findAll();
+        List<User> students = studentRepo.findAll();
         
-        model.addAttribute("users", users);
-        return "users/students";
+        model.addAttribute("users", students);
+        return "students/studentsDisplay";
     }
 
     // go to rectangles page
-    @GetMapping("/users/rectangles")
+    @GetMapping("/students/rectangles")
     public String rectanglesPage() {
-        return "users/rectangles";
+        return "students/rectanglesDisplay";
     }
 
     // go to add student page
-    @GetMapping("/users/new")
+    @GetMapping("/students/new")
     public String addPage() {
-        return "users/add";
+        return "students/add";
     }
 
     // add a student
-    @PostMapping("/users/add")
+    @PostMapping("/students/add")
     public String addUser(@RequestParam Map<String, String> user,HttpServletResponse response) {
         // checking for empty inputs
         if (user.get("name") == "" || user.get("weight") == "" 
             || user.get("height") == "" || user.get("hair_color") == ""
             || user.get("gpa") == "" || user.get("age") == "") 
             {
-                return "redirect:/users";
+                return "redirect:/students";
             }
         
         String newName = user.get("name");
@@ -64,30 +64,30 @@ public class UsersController {
         
         // checking number bounds
         if (newWeight <= 0 || newHeight <= 0 || newGpa < 0.00 || newGpa > 4.33 || newAge < 18) {
-            return "redirect:/users";
+            return "redirect:/students";
         }
         
         studentRepo.save(new User(newName,newWeight,newHeight,newHair_color,newGpa,newAge));
         response.setStatus(201);
-        return "redirect:/users";
+        return "redirect:/students";
     }
 
     // delete a student
-    @GetMapping("/users/delete/{uid}")
+    @GetMapping("/students/delete/{uid}")
     public String deleteStudent(@PathVariable Integer uid) {
         studentRepo.deleteById(uid);
-        return "redirect:/users";
+        return "redirect:/students";
     }
     
     // edit student attributes
-    @GetMapping("/users/edit/{uid}")
+    @GetMapping("/students/edit/{uid}")
 	public String editStudentForm(@PathVariable Integer uid, Model model) {
 		model.addAttribute("user", studentRepo.findById(uid).get());
-		return "/users/edit";
+		return "/students/edit";
 	}
 
     // save updated student information
-    @PostMapping("/users/{uid}")
+    @PostMapping("/students/{uid}")
 	public String updateStudent(@PathVariable Integer uid, @ModelAttribute("user") User user) {
 	
 		User student = studentRepo.findById(uid).get();
@@ -99,7 +99,7 @@ public class UsersController {
         student.setAge(user.getAge());
 		
 		studentRepo.save(student);
-		return "redirect:/users";		
+		return "redirect:/students";		
 	}
 
 }
