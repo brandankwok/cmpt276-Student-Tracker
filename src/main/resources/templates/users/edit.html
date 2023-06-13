@@ -11,7 +11,7 @@
 		<div class="row justify-content-center">
 			<div class="col-md-4">
 				<h1 class="text-center mt-5 mb-4">Edit Student</h1>
-				<form th:action="@{/save}" th:object="${user}" method="post">
+				<form th:action="@{/users/{uid} (uid=${user.uid})}" th:object="${user}" method="post">
                     
 					<div class="mb-3">
 						

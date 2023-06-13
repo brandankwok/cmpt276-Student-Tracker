@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import assignment2.assignment2.models.User;
 import assignment2.assignment2.models.UserRepository;
@@ -22,13 +20,13 @@ import jakarta.servlet.http.HttpServletResponse;
 public class UsersController {
     
     @Autowired
-    private UserRepository userRepo;
+    private UserRepository studentRepo;
     
     // display all users
     @GetMapping("/users")
     public String getAllUsers(Model model){
 
-        List<User> users = userRepo.findAll();
+        List<User> users = studentRepo.findAll();
         
         model.addAttribute("users", users);
         return "users/showAll";
@@ -63,7 +61,7 @@ public class UsersController {
             return "redirect:/users";
         }
         
-        userRepo.save(new User(newName,newWeight,newHeight,newHair_color,newGpa,newAge));
+        studentRepo.save(new User(newName,newWeight,newHeight,newHair_color,newGpa,newAge));
         response.setStatus(201);
         return "redirect:/users";
     }
@@ -71,34 +69,31 @@ public class UsersController {
     // delete a student
     @GetMapping("/users/delete/{uid}")
     public String deleteStudent(@PathVariable Integer uid) {
-        userRepo.deleteById(uid);
+        studentRepo.deleteById(uid);
         return "redirect:/users";
     }
     
     // edit student attributes
     @GetMapping("/users/edit/{uid}")
-    public ModelAndView editStudent(@PathVariable Integer uid) {
-        ModelAndView editView = new ModelAndView("/users/edit");
-        User user = userRepo.findById(uid).get();
-        editView.addObject("user", user);
+	public String editStudentForm(@PathVariable Integer uid, Model model) {
+		model.addAttribute("user", studentRepo.findById(uid).get());
+		return "/users/edit";
+	}
 
-        return editView;
-    }
     // save updated student information
-    @PostMapping("/save")
-    public String saveStudent(@ModelAttribute("user") User user) {
-        
-        // User student = userRepo.findById(uid).get();
-        // student.setName(user.getName());
-        // student.setHeight(user.getHeight());
-        // student.setWeight(user.getWeight());
-        // student.setHair_color(user.getHair_color());
-        // student.setGpa(user.getGpa());
-        // student.setAge(user.getAge());
-
-        userRepo.save(user);
-        return "redirect:/users";
-    }
-
+    @PostMapping("/users/{uid}")
+	public String updateStudent(@PathVariable Integer uid, @ModelAttribute("user") User user) {
+	
+		User student = studentRepo.findById(uid).get();
+        student.setName(user.getName());
+        student.setHeight(user.getHeight());
+        student.setWeight(user.getWeight());
+        student.setHair_color(user.getHair_color());
+        student.setGpa(user.getGpa());
+        student.setAge(user.getAge());
+		
+		studentRepo.save(student);
+		return "redirect:/users";		
+	}
 
 }

@@ -18,7 +18,6 @@
                 
                 <table class="table table-striped">
                     <tr>
-                        <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Height (cm)</th>
                         <th scope="col">Weight (lbs)</th>
@@ -28,7 +27,6 @@
                         <th scope="col">Actions</th>
                     </tr>
                     <tr th:each="user: ${users}">
-                        <td th:text="${user.uid}"></td>
                         <td th:text="${user.name}"></td>
                         <td th:text="${user.height}"></td>
                         <td th:text="${user.weight}"></td>
@@ -36,10 +34,7 @@
                         <td th:text="${user.gpa}"></td>
                         <td th:text="${user.age}"></td>
                         <td>
-                            <!-- <form action="/users/edit" method="get">
-                                <button class="btn btn-info">Edit</button>
-                            </form> -->
-                            <a th:href="@{'/users/edit/' + ${user.uid}}" class="btn btn-primary">Edit</a>
+                            <a th:href="@{/users/edit/{uid}(uid=${user.uid})}" class="btn btn-primary">Edit</a>
                             <a th:href="@{/users/delete/{uid}(uid=${user.uid})}" class="btn btn-danger ml-2">Delete</a>
                         </td>
                     </tr>
