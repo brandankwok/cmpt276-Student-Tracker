@@ -8,16 +8,31 @@
     <link th:href="@{/rectangles.css}" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <h1>Student Rectangle Display</h1>
-    </header>
+    <main  class="container-fluid">
+        <div class="row justify-content-center">
+            <h1 id="heading">Student Rectangle Display</h1>
+            <div class="col-lg-5">
+                
 
-    <main>
+                <div class="btn-toolbar">
+                    <form action="/students/new" method="get">
+                        <button class="btn btn-primary" style="margin-bottom: 20px;">Add Student</button>
+                    </form>
+                    <form action="/students" method="get">
+                        <button class="btn btn-primary" style="margin-left: 20px">Student Table</button>
+                    </form>
+                </div>
+            </div>
+        </div>
 
+        <div id="rectangles" class="card" th:each="user: ${users}" th:style="'width:'+${user.weight}+'pt'">
+            <div class="card-body" th:style="'height:'+${user.height}+'pt'">
+                <h5 th:text="${user.name}" th:style="'color:'+${user.hair_color}"></h5>
+                <p th:text="'Age: ' + ${user.age}"></p>
+                <a th:href="@{/students/{uid}(uid=${user.uid})}" class="link-secondary">Edit</a>
+                <a th:href="@{/students/deleteRectangle/{uid}(uid=${user.uid})}" class="link-danger">Delete</a>
+            </div>
+        </div>
     </main>
-
-    <footer>
-
-    </footer>
 </body>
 </html>

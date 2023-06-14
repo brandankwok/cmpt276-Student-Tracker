@@ -16,10 +16,10 @@
 
                 <div class="btn-toolbar">
                     <form action="/students/new" method="get">
-                        <button class="btn btn-primary" style="margin-bottom: 15px;">Add Student</button>
+                        <button class="btn btn-primary" style="margin-bottom: 20px;">Add Student</button>
                     </form>
                     <form action="/students/rectangles" method="get">
-                        <button class="btn btn-primary" style="margin-left: 15px">Rectangle View</button>
+                        <button class="btn btn-primary" style="margin-left: 20px">Rectangle Display</button>
                     </form>
                 </div>
                 
@@ -45,23 +45,13 @@
                             <td th:text="${user.gpa}" class="text-center"></td>
                             <td th:text="${user.age}" class="text-center"></td>
                             <td>
-                                <a th:href="@{/students/{uid}(uid=${user.uid})}" class="btn btn-primary justify-content-center">Edit</a>
+                                <a th:href="@{/students/{uid}(uid=${user.uid})}" class="btn btn-primary">Edit</a>
                                 <a th:href="@{/students/delete/{uid}(uid=${user.uid})}" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                     </tbody>
                     
                 </table>
-                <!-- <ul>
-                    <li th:style="'font-size:'+${user.height}+'pt'" th:each="user: ${users}">
-                        <span th:text="${user.name}"></span> <br>
-                        <span th:text="${user.favourite_food}"></span>
-                        <div th:switch="${user.name}">
-                            <span th:case="'Brandan'">Brandan is a cool guy!</span>
-                            <span th:case="*">regular user</span>
-                        </div>
-                    </li>
-                </ul> -->
             </div>
         </div>
     </main>

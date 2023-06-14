@@ -1,7 +1,14 @@
 * {background-color: aliceblue;}
 
-h1 {
-    font-size: 60px;
+#heading {
+    font-size: 50px;
     text-align: center;
-    margin: 50px;
+    margin: 40px;
 }
+
+#rectangles {
+    border: 3px solid black;
+    float:left;
+    margin: 3em;
+}
+

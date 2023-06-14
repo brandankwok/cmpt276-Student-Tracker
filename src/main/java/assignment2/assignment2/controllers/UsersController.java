@@ -34,7 +34,10 @@ public class UsersController {
 
     // go to rectangles page
     @GetMapping("/students/rectangles")
-    public String rectanglesPage() {
+    public String rectanglesPage(Model model) {
+        List<User> students = studentRepo.findAll();
+        
+        model.addAttribute("users", students);
         return "students/rectanglesDisplay";
     }
 
@@ -52,7 +55,7 @@ public class UsersController {
             || user.get("height") == "" || user.get("hair_color") == ""
             || user.get("gpa") == "" || user.get("age") == "") 
             {
-                return "redirect:/students";
+                return "students/add";
             }
         
         String newName = user.get("name");
@@ -63,8 +66,8 @@ public class UsersController {
         int newAge = Integer.parseInt(user.get("age"));
         
         // checking number bounds
-        if (newWeight <= 0 || newHeight <= 0 || newGpa < 0.00 || newGpa > 4.33 || newAge < 18) {
-            return "redirect:/students";
+        if (newWeight < 70 || newHeight < 100 || newGpa < 0.00 || newGpa > 4.33 || newAge < 16 || newAge > 100) {
+            return "students/add";
         }
         
         studentRepo.save(new User(newName,newWeight,newHeight,newHair_color,newGpa,newAge));
@@ -72,11 +75,18 @@ public class UsersController {
         return "redirect:/students";
     }
 
-    // delete a student
+    // delete a student from table
     @GetMapping("/students/delete/{uid}")
     public String deleteStudent(@PathVariable Integer uid) {
         studentRepo.deleteById(uid);
         return "redirect:/students";
+    }
+
+    // delete student rectangle
+    @GetMapping("/students/deleteRectangle/{uid}")
+    public String deleteStudentRectangle(@PathVariable Integer uid) {
+        studentRepo.deleteById(uid);
+        return "redirect:/students/rectangles";
     }
     
     // edit student attributes
@@ -101,5 +111,4 @@ public class UsersController {
 		studentRepo.save(student);
 		return "redirect:/students";		
 	}
-
 }

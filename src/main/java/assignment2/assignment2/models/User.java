@@ -3,7 +3,7 @@ package assignment2.assignment2.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="users")
+@Table(name="students")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
