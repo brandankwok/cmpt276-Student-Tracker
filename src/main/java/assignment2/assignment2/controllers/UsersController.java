@@ -66,7 +66,7 @@ public class UsersController {
         int newAge = Integer.parseInt(user.get("age"));
         
         // checking number bounds
-        if (newWeight < 70 || newHeight < 100 || newGpa < 0.00 || newGpa > 4.33 || newAge < 16 || newAge > 100) {
+        if (newWeight < 70 || newWeight > 300 || newHeight < 100 || newHeight > 215 || newGpa < 0.00 || newGpa > 4.33 || newAge < 16 || newAge > 100) {
             return "students/add";
         }
         
